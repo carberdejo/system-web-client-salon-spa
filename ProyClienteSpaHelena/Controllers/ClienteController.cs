@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProyClienteSpaHelena.Services;
+using ProySpaHelena.Models;
 
 namespace ProyClienteSpaHelena.Controllers
 {
     public class ClienteController : Controller
     {
         private readonly ClienteService _clienteService;
+
         public ClienteController(ClienteService clienteService)
         {
             _clienteService = clienteService;
@@ -26,66 +28,82 @@ namespace ProyClienteSpaHelena.Controllers
         }
 
         // GET: ClienteController/Create
-        public ActionResult Create()
+        public async Task<IActionResult> CreateClientes()
         {
-            return View();
+            Cliente cliente = await Task.Run(()=> new Cliente());
+            return View(cliente);
         }
 
         // POST: ClienteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> CreateClientes(Cliente obj)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    Cliente cli = await _clienteService.CreateClienteAsync(obj);
+
+                    return RedirectToAction(nameof(Details),new { id = cli.Id});
+                }
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.message = "Error al crear el cliente: " + ex.Message;
             }
+            return View(obj);
         }
 
         // GET: ClienteController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> EditClientes(int id)
         {
-            return View();
+            return View(await _clienteService.GetClienteByIdAsync(id));
         }
 
         // POST: ClienteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> EditClientes(int id, Cliente obj)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    TempData["mensaje"] = await _clienteService.UpdateClienteAsync(id,obj);
+
+                    return RedirectToAction(nameof(IndexClientes));
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.message = "Error al crear el cliente: " + ex.Message;
             }
+            return View(obj);
         }
 
         // GET: ClienteController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> DeleteClientes(int id)
         {
-            return View();
+            return View(await _clienteService.GetClienteByIdAsync(id));
         }
 
         // POST: ClienteController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteClientes(int id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                TempData["mensaje"] = await _clienteService.DeleteClienteAsync(id);
+                return RedirectToAction(nameof(IndexClientes));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ViewBag.mensaje = e.Message;
+
             }
+            return View();
         }
     }
 }

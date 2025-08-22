@@ -7,8 +7,8 @@ namespace ProyClienteSpaHelena.Services
         // Define methods for the ClienteService interface
         Task<List<Cliente>> GetAllClientesAsync();
         Task<Cliente> GetClienteByIdAsync(int id);
-        Task <string>CreateClienteAsync(Cliente cliente);
+        Task <Cliente>CreateClienteAsync(Cliente cliente);
         Task <string>UpdateClienteAsync(int id, Cliente cliente);
-        Task<bool> DeleteClienteAsync(int id);
+        Task<string> DeleteClienteAsync(int id);
     }
 }
