@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ProySpaHelena.Models.VariantesServicio>
+
+@{
+    ViewData["Title"] = "IndexEspecialidades";
+}
+
+<h1>IndexEspecialidades</h1>
+
+<p>
+    <a asp-action="CreateEspecialidades">Crear</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServicioId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DuracionMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServicioId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DuracionMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activo)
+            </td>
+            <td>
+                    @Html.ActionLink("Editar", "EditEspecialidad", new { id=item.Id}) |
+                    @Html.ActionLink("Ver", "DetailsEspe", new {  id=item.Id }) |
+                    @Html.ActionLink("Eliminar", "DeleteEspecialidad", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

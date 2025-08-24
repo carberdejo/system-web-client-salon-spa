@@ -1,0 +1,101 @@
+﻿@model ProyClienteSpaHelena.Models.ReservaRequestDto
+
+@{
+    ViewData["Title"] = "CreateReserva";
+}
+
+<h2 class="text-center my-3">REGISTRO DE RESERVA</h2>
+
+<form asp-action="CreateReserva">
+    <div class="border p-4 rounded bg-light">
+        <div class="row mb-2">
+            <div class="form-group">
+                <label asp-for="ClienteId" class="form-label">ID Cliente</label>
+                @Html.DropDownListFor(model => model.ClienteId, (SelectList)ViewBag.cliente, "-- Seleccione --", new { @class = "form-control" })
+
+            </div>
+            <div class="col-md-4">
+                <label asp-for="RecepcionistaId" class="form-label">ID Recepcionista</label>
+                @Html.DropDownListFor(model => model.RecepcionistaId, (SelectList)ViewBag.trabajadores, "-- Seleccione --", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="TrabajadoraId">Trabajadora</label>
+                @Html.DropDownListFor(model => model.TrabajadoraId, (SelectList)ViewBag.trabajadores, "-- Seleccione --", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <label asp-for="Fecha" class="form-label">Fecha</label>
+                <input asp-for="Fecha" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Estado" class="form-label">Estado</label>
+                <input asp-for="Estado" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Notas" class="form-label">Notas</label>
+                <input asp-for="Notas" class="form-control" />
+            </div>
+        </div>
+
+        <hr />
+
+        <h5>Detalles de la Reserva</h5>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>VarianteId</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody id="detalles-table-body">
+                <tr>
+                    <td>
+                        @Html.DropDownList("Detalles[0].VarianteId", (SelectList)ViewBag.especialidades, "-- Seleccione Variante --", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <input type="number" name="Detalles[0].Cantidad" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="number" name="Detalles[0].Precio" class="form-control" step="0.01" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-secondary mb-3" onclick="agregarDetalle()">Agregar Detalle</button>
+
+        <div class="d-flex justify-content-between mt-4">
+            <input type="submit" value="Grabar" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-danger">Salir</a>
+        </div>
+    </div>
+</form>
+<div>@ViewBag.message</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        let detalleIndex = 0;
+
+        function agregarDetalle() {
+            const body = document.getElementById("detalles-table-body");
+
+            const row = `
+                <tr>
+                    <td><input name="Detalles[${detalleIndex}].VarianteId" class="form-control" /></td>
+                    <td><input name="Detalles[${detalleIndex}].Cantidad" class="form-control" /></td>
+                    <td><input name="Detalles[${detalleIndex}].Precio" class="form-control" /></td>
+                </tr>`;
+
+            body.insertAdjacentHTML('beforeend', row);
+            detalleIndex++;
+        }
+
+        // Cargar una fila por defecto al abrir
+        window.onload = agregarDetalle;
+    </script>
+}

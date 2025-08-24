@@ -1,9 +1,10 @@
-﻿using ProySpaHelena.Models;
+﻿using ProyClienteSpaHelena.Models;
+using ProySpaHelena.Models;
 
 namespace ProyClienteSpaHelena.Services
 {
     public interface SessionService
     {
-        Task<string> Login(string email,string password);
+        Task<string> Login(LoginDTO loginDTO);
     }
 }
