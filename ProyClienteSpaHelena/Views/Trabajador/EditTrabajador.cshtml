@@ -1,72 +1,146 @@
 ﻿@model ProySpaHelena.Models.Trabajadora
 
 @{
-    ViewData["Title"] = "EditTrabajador";
+    ViewData["Title"] = "Editar Trabajador";
 }
 
-<h1>EditTrabajador</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom-0">
+                    <h3 class="text-center fw-semibold text-uppercase" style="color:#8b5e3c;">
+                        <i class="bi bi-pencil-square me-2"></i>Editar Trabajador
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="EditTrabajador">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>Trabajadora</h4>
-<hr />
-<div class="row justify-content-center">
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="EditTrabajador">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Id" class="form-label fw-bold"></label>
-                    <input asp-for="Id" class="form-control" readonly />
-                    <span asp-validation-for="Id" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="Id" class="form-label">ID</label>
+                            <input asp-for="Id" class="form-control" readonly />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Nombre" class="form-label">Nombre</label>
+                            <input asp-for="Nombre" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Apellido" class="form-label">Apellido</label>
+                            <input asp-for="Apellido" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Correo" class="form-label">Correo</label>
+                            <input asp-for="Correo" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Telefono" class="form-label">Teléfono</label>
+                            <input asp-for="Telefono" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Dni" class="form-label">DNI</label>
+                            <input asp-for="Dni" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Contrasena" class="form-label">Contraseña</label>
+                            <input asp-for="Contrasena" class="form-control" type="password" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdRol" class="form-label">Rol</label>
+                            <input asp-for="IdRol" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Estado" class="form-label">Estado</label>
+                            <input asp-for="Estado" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Activa" class="form-label">Activa</label>
+                            <input asp-for="Activa" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FechaInicio" class="form-label">Fecha de Inicio</label>
+                            <input asp-for="FechaInicio" class="form-control" type="date" />
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="spa-btn spa-btn-green">
+                                💾 Guardar
+                            </button>
+                            <a asp-action="IndexTrabajador" class="spa-btn spa-btn-blue">
+                                🔙 Volver a la lista
+                            </a>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Nombre" class="form-label fw-bold"></label>
-                    <input asp-for="Nombre" class="form-control" placeholder="Nombre del trabajador" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Apellido" class="form-label fw-bold"></label>
-                    <input asp-for="Apellido" class="form-control" placeholder="Apellido del trabajador" />
-                    <span asp-validation-for="Apellido" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Correo" class="form-label fw-bold"></label>
-                    <input asp-for="Correo" class="form-control" placeholder="Correo Electronico" />
-                    <span asp-validation-for="Correo" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Telefono" class="form-label fw-bold"></label>
-                    <input asp-for="Telefono" class="form-control" placeholder="Numero de Telefono" />
-                    <span asp-validation-for="Telefono" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Dni" class="form-label fw-bold"></label>
-                    <input asp-for="Dni" class="form-control" placeholder="Numero de DNI" />
-                    <span asp-validation-for="Dni" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Contrasena" class="form-label fw-bold"></label>
-                    <input asp-for="Contrasena" class="form-control" placeholder="Contraseña" />
-                    <span asp-validation-for="Contrasena" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="IdRol" class="form-label fw-bold"></label>
-                    <input asp-for="IdRol" class="form-control" />
-                    <span asp-validation-for="IdRol" class="text-danger"></span>
-                </div>
-                <div class="d-flex gap-2">
-                    <button type="submit" class="spa-btn spa-btn-green">
-                        💾 Guardar
-                    </button>
-                    <a asp-action="IndexTrabajador" class="spa-btn spa-btn-blue">
-                        🔙 Volver a la lista
-                    </a>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+
+
+
+        @section Scripts {
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+        <style>
+            .spa-btn {
+                border-radius: 10px;
+                font-weight: 600;
+                padding: 6px 14px;
+                border: none;
+                transition: all 0.3s ease-in-out;
+                color: #fff !important;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .spa-btn-green {
+                background: linear-gradient(135deg, #34d399, #059669);
+            }
+
+                .spa-btn-green:hover {
+                    background: linear-gradient(135deg, #059669, #047857);
+                    transform: scale(1.08);
+                }
+
+            .spa-btn-blue {
+                background: linear-gradient(135deg, #60a5fa, #2563eb);
+            }
+
+                .spa-btn-blue:hover {
+                    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+                    transform: scale(1.08);
+                }
+
+            .spa-btn-purple {
+                background: linear-gradient(135deg, #a78bfa, #7c3aed);
+                font-size: 1rem;
+                padding: 10px 18px;
+            }
+
+                .spa-btn-purple:hover {
+                    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+                    transform: scale(1.1);
+                    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+                }
+
+            .spa-btn-yellow {
+                background: linear-gradient(135deg, #facc15, #eab308); /* amarillo dorado */
+            }
+
+                .spa-btn-yellow:hover {
+                    background: linear-gradient(135deg, #eab308, #ca8a04);
+                    transform: scale(1.08);
+                    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+                }
+        </style>

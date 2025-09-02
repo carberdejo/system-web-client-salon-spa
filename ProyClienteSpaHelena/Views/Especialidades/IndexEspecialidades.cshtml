@@ -1,65 +1,146 @@
 ﻿@model IEnumerable<ProySpaHelena.Models.VariantesServicio>
 
+
 @{
     ViewData["Title"] = "IndexEspecialidades";
 }
 
+
 <h1>IndexEspecialidades</h1>
 
+
 <p>
-    <a asp-action="CreateEspecialidades">Crear</a>
+    <a asp-action="CreateEspecialidades" class="spa-btn spa-btn-yellow">➕ Crear</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table spa-table align-middle">
+    <thead class="spa-thead">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ServicioId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DuracionMin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activo)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.ServicioId)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.DuracionMin)</th>
+            <th>@Html.DisplayNameFor(model => model.Precio)</th>
+            <th>@Html.DisplayNameFor(model => model.Activo)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServicioId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DuracionMin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activo)
-            </td>
-            <td>
-                    @Html.ActionLink("Editar", "EditEspecialidad", new { id=item.Id}) |
-                    @Html.ActionLink("Ver", "DetailsEspe", new {  id=item.Id }) |
-                    @Html.ActionLink("Eliminar", "DeleteEspecialidad", new { id = item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.ServicioId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.DuracionMin)</td>
+                <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                <td>@Html.DisplayFor(modelItem => item.Activo)</td>
+                <td>
+                    <a asp-action="EditEspecialidad" asp-route-id="@item.Id" class="spa-btn spa-btn-green">✏️ Editar</a> |
+                    <a asp-action="DetailsEspe" asp-route-id="@item.Id" class="spa-btn spa-btn-blue">👁️ Ver</a> |
+                    <a asp-action="DeleteEspecialidad" asp-route-id="@item.Id" class="spa-btn spa-btn-purple">🗑️ Eliminar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+<style>
+    /* TABLA SPA */
+    .spa-table {
+        border-radius: 15px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        font-size: 1rem;
+        width: 100%;
+    }
+
+
+        .spa-table th,
+        .spa-table td {
+            padding: 14px 18px;
+            text-align: center;
+        }
+
+
+    .spa-thead {
+        background: linear-gradient(135deg, #06b6d4, #3b82f6);
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
+    }
+
+
+    .spa-table tbody tr {
+        transition: all 0.3s ease;
+    }
+
+
+        .spa-table tbody tr:hover {
+            background: #f0f9ff;
+            transform: scale(1.01);
+        }
+
+
+    /* BOTONES SPA */
+    .spa-btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        color: #fff !important;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+
+    .spa-btn-green {
+        background: linear-gradient(135deg, #34d399, #059669);
+    }
+
+
+        .spa-btn-green:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: scale(1.08);
+        }
+
+
+    .spa-btn-blue {
+        background: linear-gradient(135deg, #60a5fa, #2563eb);
+    }
+
+
+        .spa-btn-blue:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.08);
+        }
+
+
+    .spa-btn-purple {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
+    }
+
+
+        .spa-btn-purple:hover {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+
+    .spa-btn-yellow {
+        background: linear-gradient(135deg, #facc15, #eab308);
+    }
+
+
+        .spa-btn-yellow:hover {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            transform: scale(1.08);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+</style>
+

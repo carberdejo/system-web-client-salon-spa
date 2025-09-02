@@ -1,65 +1,178 @@
 ﻿@model IEnumerable<ProyClienteSpaHelena.Models.Reporte_Trabajadores>
-
 @{
     ViewData["Title"] = "ReporteTrabajadores";
 }
-
 <h1>ReporteTrabajadores</h1>
+<div class="table-responsive">
+    <table class="table spa-table">
+            <thead>
+                <tr>
+                    <th>
+                    @Html.DisplayNameFor(model => model.id)
+                    </th>
+                    <th>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HorasTotales)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiasaTrabajar)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HorasTotales)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiasaTrabajar)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    @Html.DisplayNameFor(model => model.nombre)
+
+                    </th>
+
+                    <th>
+
+                    @Html.DisplayNameFor(model => model.dni)
+
+                    </th>
+
+                    <th>
+
+                    @Html.DisplayNameFor(model => model.telefono)
+
+                    </th>
+
+                    <th>
+
+                       Horas Totales
+                    </th>
+                    <th>
+                        Dias Totales Trabajados
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            @foreach (var item in Model)
+
+            {
+
+                        <tr>
+
+                            <td>
+
+                        @Html.DisplayFor(modelItem => item.id)
+
+                            </td>
+
+                            <td>
+
+                        @Html.DisplayFor(modelItem => item.nombre)
+
+                            </td>
+
+                            <td>
+
+                        @Html.DisplayFor(modelItem => item.dni)
+
+                            </td>
+
+                            <td>
+
+                        @Html.DisplayFor(modelItem => item.telefono)
+
+                            </td>
+
+                            <td>
+
+                        @Html.DisplayFor(modelItem => item.HorasTotales)
+
+                            </td>
+
+                            <td>
+
+                        @Html.DisplayFor(modelItem => item.DiasaTrabajar)
+
+                            </td>
+
+                        </tr>
+
+            }
+
+            </tbody>
+
+        </table>
+
+</div>
+
+
+
+<style>
+
+    /* Tabla estilo spa */
+
+    .spa-table {
+        background: #f8fafc; /* azul muy clarito de fondo */
+
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+
+
+        /* Encabezados */
+
+        .spa-table thead {
+            background: linear-gradient(90deg, #38bdf8, #60a5fa); /* celestito degradado */
+
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+
+        /* Filas */
+
+        .spa-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+
+
+            .spa-table tbody tr:nth-child(even) {
+                background: #f1f5f9; /* alternar fila gris-azulado */
+            }
+
+
+
+            /* Hover en filas */
+
+            .spa-table tbody tr:hover {
+                background: rgba(56, 189, 248, 0.15); /* celestito suave */
+            }
+
+
+
+        /* Celdas */
+
+        .spa-table th,
+        .spa-table td {
+            padding: 14px 18px;
+            vertical-align: middle;
+        }
+
+
+
+        /* Botones dentro de la tabla */
+
+        .spa-table .btn-info {
+            background: #38bdf8;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+
+
+
+            .spa-table .btn-info:hover {
+                background: #0ea5e9;
+                transform: scale(1.05);
+            }
+
+</style>

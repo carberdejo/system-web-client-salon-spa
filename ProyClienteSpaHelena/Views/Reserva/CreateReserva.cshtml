@@ -8,11 +8,11 @@
     var especialidades = ViewBag.especialidades as SelectList;
     var especialidadesHtml = especialidades!.Select(x => $"<option value='{x.Value}'>{x.Text}</option>");
     var opcionesEspecialidades = JsonConvert.SerializeObject(especialidadesHtml);
-	// if (Context.Session.GetString("Usuario") == null)
-	// {
-	// 	Response.Redirect("/Home/Index");
-	// }
-    var trabajador = JsonConvert.DeserializeObject <Trabajadora> (Context.Session.GetString("Usuario"));
+    // if (Context.Session.GetString("Usuario") == null)
+    // {
+    // 	Response.Redirect("/Home/Index");
+    // }
+    var trabajador = JsonConvert.DeserializeObject<Trabajadora>(Context.Session.GetString("Usuario"));
 }
 
 <h2 class="text-center my-3">REGISTRO DE RESERVA</h2>
@@ -24,7 +24,7 @@
                 <label asp-for="ClienteId" class="form-label">Cliente</label>
                 @Html.DropDownListFor(model => model.ClienteId, (SelectList)ViewBag.cliente, "-- Seleccione Cliente --", new { @class = "form-control" })
             </div>
-            
+
 
             <div class="col-md-4">
                 <label class="form-label">Recepcionista</label>

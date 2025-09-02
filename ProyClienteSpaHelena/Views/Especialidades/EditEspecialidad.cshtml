@@ -1,58 +1,169 @@
 ﻿@model ProySpaHelena.Models.VariantesServicio
 
+
 @{
-    ViewData["Title"] = "EditEspecialidad";
+    ViewData["Title"] = "✏️ Editar Especialidad";
 }
 
-<h1>EditEspecialidad</h1>
 
-<h4>VariantesServicio</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditEspecialidad">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServicioId" class="control-label"></label>
-                <input asp-for="ServicioId" class="form-control" />
-                <span asp-validation-for="ServicioId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DuracionMin" class="control-label"></label>
-                <input asp-for="DuracionMin" class="form-control" />
-                <span asp-validation-for="DuracionMin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Activo" class="control-label"></label>
-                <input asp-for="Activo" class="form-control" />
-                <span asp-validation-for="Activo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="form-container">
+    <h1>✏️ Editar Especialidad</h1>
+    <h4>🛠️ Variantes de Servicio</h4>
+    <hr />
+    <form asp-action="EditEspecialidad">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <div class="form-group">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="ServicioId" class="control-label"></label>
+            <input asp-for="ServicioId" class="form-control" />
+            <span asp-validation-for="ServicioId" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Nombre" class="control-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="DuracionMin" class="control-label"></label>
+            <input asp-for="DuracionMin" class="form-control" />
+            <span asp-validation-for="DuracionMin" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Precio" class="control-label"></label>
+            <input asp-for="Precio" class="form-control" />
+            <span asp-validation-for="Precio" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Activo" class="control-label"></label>
+            <input asp-for="Activo" class="form-control" />
+            <span asp-validation-for="Activo" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="💾 Guardar Cambios" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <div>
+        <a asp-action="IndexEspecialidades" class="back-link">⬅️ Volver al Listado</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+<style>
+
+
+    /* ---- Estilos para el formulario de edición ---- */
+    .form-container {
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 25px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+
+        .form-container h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+
+        .form-container h4 {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+
+        .form-group label {
+            font-weight: 600;
+            color: #444;
+        }
+
+
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+
+        .form-control:focus {
+            border-color: #4CAF50;
+            box-shadow: 0px 0px 6px rgba(76, 175, 80, 0.4);
+        }
+
+
+    .text-danger {
+        font-size: 13px;
+        color: #e74c3c;
+    }
+
+
+    .btn-primary {
+        background: #4CAF50;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+        width: 100%;
+    }
+
+
+        .btn-primary:hover {
+            background: #45a049;
+            cursor: pointer;
+        }
+
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #3498db;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+
+        .back-link:hover {
+            color: #217dbb;
+        }
+</style>
