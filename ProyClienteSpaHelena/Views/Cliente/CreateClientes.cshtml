@@ -4,49 +4,54 @@
     ViewData["Title"] = "CreateClientes";
 }
 
-<h1>CreateClientes</h1>
+<h1 class="mb-4 text-success">✨ Crear Nuevo Cliente</h1>
 
-<h4>Cliente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateClientes">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="NombreCompleto" class="control-label"></label>
-                <input asp-for="NombreCompleto" class="form-control" />
-                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dni" class="control-label"></label>
-                <input asp-for="Dni" class="form-control" />
-                <span asp-validation-for="Dni" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreadoEn" class="control-label"></label>
-                <input asp-for="CreadoEn" class="form-control" />
-                <span asp-validation-for="CreadoEn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<div class="card p-4 shadow-lg rounded-4">
+    <h4 class="mb-3">Datos del Cliente</h4>
+    <hr />
 
-<div>
-    <a asp-action="IndexClientes">Back to List</a>
+    <form asp-action="CreateClientes">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="NombreCompleto" class="form-label fw-bold"></label>
+            <input asp-for="NombreCompleto" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Telefono" class="form-label fw-bold"></label>
+            <input asp-for="Telefono" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Telefono" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Correo" class="form-label fw-bold"></label>
+            <input asp-for="Correo" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Correo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Dni" class="form-label fw-bold"></label>
+            <input asp-for="Dni" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Dni" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CreadoEn" class="form-label fw-bold"></label>
+            <input asp-for="CreadoEn" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="CreadoEn" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="spa-btn spa-btn-green">
+                ✅ Crear
+            </button>
+            <a asp-action="IndexClientes" class="spa-btn spa-btn-blue">
+                🔙 Volver a la lista
+            </a>
+        </div>
+    </form>
 </div>
 
 @if (ViewBag.message != null)
@@ -55,5 +60,61 @@
 }
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
+
+<style>
+    .spa-btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        color: #fff !important;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .spa-btn-green {
+        background: linear-gradient(135deg, #34d399, #059669);
+    }
+
+        .spa-btn-green:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-blue {
+        background: linear-gradient(135deg, #60a5fa, #2563eb);
+    }
+
+        .spa-btn-blue:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-purple {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+
+        .spa-btn-purple:hover {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+    .spa-btn-yellow {
+        background: linear-gradient(135deg, #facc15, #eab308); /* amarillo dorado */
+    }
+
+        .spa-btn-yellow:hover {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            transform: scale(1.08);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+</style>

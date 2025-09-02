@@ -1,80 +1,107 @@
 ﻿@model ProySpaHelena.Models.Trabajadora
 
 @{
-    ViewData["Title"] = "DeleteTrabajador";
+    ViewData["Title"] = "Eliminar Trabajadora";
 }
 
-<h1>DeleteTrabajador</h1>
+<h1 class="mb-4 text-danger">🗑️ Eliminar Trabajadora</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Trabajadora</h4>
+<div class="card p-4 shadow-lg rounded-4">
+    <h4 class="mb-3">¿Seguro que deseas eliminar esta trabajadora?</h4>
     <hr />
+
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Correo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Correo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dni)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dni)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Contrasena)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Contrasena)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdRol)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdRol)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Activa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaInicio)
-        </dd>
+        <dt class="col-sm-3 fw-bold">Código</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Id)</dd>
+
+        <dt class="col-sm-3 fw-bold">Nombre</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+        <dt class="col-sm-3 fw-bold">Apellido</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Apellido)</dd>
+
+        <dt class="col-sm-3 fw-bold">Correo</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Correo)</dd>
+
+        <dt class="col-sm-3 fw-bold">Teléfono</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
+
+        <dt class="col-sm-3 fw-bold">DNI</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Dni)</dd>
+
+        <dt class="col-sm-3 fw-bold">Contraseña</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Contrasena)</dd>
+
+        <dt class="col-sm-3 fw-bold">Rol</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.IdRol)</dd>
+
+        <dt class="col-sm-3 fw-bold">Fecha de Inicio</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.FechaInicio)</dd>
     </dl>
-    
-    <form asp-action="DeleteTrabajador">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+
+    <form asp-action="DeleteTrabajador" class="mt-4">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="spa-btn spa-btn-red">
+                ❌ Eliminar
+            </button>
+            <a asp-action="IndexTrabajador" class="spa-btn spa-btn-blue">
+                🔙 Cancelar
+            </a>
+        </div>
     </form>
 </div>
+
+<style>
+    .spa-btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        color: #fff !important;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .spa-btn-green {
+        background: linear-gradient(135deg, #34d399, #059669);
+    }
+
+        .spa-btn-green:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-blue {
+        background: linear-gradient(135deg, #60a5fa, #2563eb);
+    }
+
+        .spa-btn-blue:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-purple {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+
+        .spa-btn-purple:hover {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+    .spa-btn-yellow {
+        background: linear-gradient(135deg, #facc15, #eab308); /* amarillo dorado */
+    }
+
+        .spa-btn-yellow:hover {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            transform: scale(1.08);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+</style>

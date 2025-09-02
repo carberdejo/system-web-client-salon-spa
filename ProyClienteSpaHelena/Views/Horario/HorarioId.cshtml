@@ -1,53 +1,35 @@
-﻿@model ProySpaHelena.Models.Trabajadora
+﻿@model ProySpaHelena.Models.Disponibilidad
 
 @{
-    ViewData["Title"] = "Detalles de Trabajadora";
+    ViewData["Title"] = "HorarioId";
 }
 
-<h1 class="mb-4 text-center">👩‍💼 Detalles de la Trabajadora</h1>
-
-<div class="card shadow-lg p-4 spa-card">
+<div class="card shadow-lg border-0 mt-4">
+    <div class="card-header text-center">
+        <h2 class="spa-btn spa-btn-purple w-100">🕒 Detalle de Disponibilidad</h2>
+    </div>
     <div class="card-body">
         <dl class="row">
-            <dt class="col-sm-3">ID</dt>
+            <dt class="col-sm-3 fw-bold">Código</dt>
             <dd class="col-sm-9">@Html.DisplayFor(model => model.Id)</dd>
 
-            <dt class="col-sm-3">Nombre</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+            <dt class="col-sm-3 fw-bold">Trabajadora</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.TrabajadoraId)</dd>
 
-            <dt class="col-sm-3">Apellido</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Apellido)</dd>
+            <dt class="col-sm-3 fw-bold">Hora Inicio</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.HoraInicio)</dd>
 
-            <dt class="col-sm-3">Correo</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Correo)</dd>
+            <dt class="col-sm-3 fw-bold">Hora Fin</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.HoraFin)</dd>
 
-            <dt class="col-sm-3">Teléfono</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
-
-            <dt class="col-sm-3">DNI</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Dni)</dd>
-
-            <dt class="col-sm-3">Contraseña</dt>
-            <dd class="col-sm-9">
-                @if (!string.IsNullOrEmpty(Model.Contrasena))
-                {
-                    @Html.Raw(new string('*', Model.Contrasena.Length))
-                }
-            </dd>
-
-            <dt class="col-sm-3">Fecha de Inicio</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.FechaInicio)</dd>
+            <dt class="col-sm-3 fw-bold">Válido Desde</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ValidoDesde)</dd>
         </dl>
     </div>
-</div>
-
-<div class="mt-4 text-center">
-    <a asp-action="EditTrabajador" asp-route-id="@Model.Id" class="spa-btn spa-btn-green">
-        ✏️ Editar
-    </a>
-    <a asp-action="IndexTrabajador" class="spa-btn spa-btn-blue">
-        🔙 Regresar
-    </a>
+    <div class="card-footer text-center">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="spa-btn spa-btn-yellow">✏️ Editar</a>
+        <a asp-action="AsistenciaTrabajador" class="spa-btn spa-btn-blue ms-2">↩️ Volver</a>
+    </div>
 </div>
 
 <style>

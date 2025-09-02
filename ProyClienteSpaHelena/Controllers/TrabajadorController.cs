@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProyClienteSpaHelena.Models;
+using ProyClienteSpaHelena.Security;
 using ProyClienteSpaHelena.Services;
 using ProySpaHelena.Models;
 
 namespace ProyClienteSpaHelena.Controllers
 {
+    [AuthorizeSession]
     public class TrabajadorController : Controller
     {
         private readonly TrabajadorService _trabajadorService;
@@ -17,6 +19,43 @@ namespace ProyClienteSpaHelena.Controllers
         public async Task<IActionResult> IndexTrabajador()
         {
             return View(await _trabajadorService.GetAllTrabajadorAsync());
+        }
+
+        // GET: AsistenciaTrabajadorController
+        public async Task<IActionResult> AsistenciaTrabajador()
+        {
+            return View(await _trabajadorService.GetAllTrabajadorAsync());
+        }
+
+        // GET: RegistrarAsistenciaController
+        public async Task<IActionResult> RegistrarAsistencia(int id)
+        {
+            var trabajador = await _trabajadorService.GetTrabajadorByIdAsync(id);
+            ViewBag.trabajador = trabajador;
+            return View(await Task.Run(()=>new Asistencia() ));
+        }
+        [HttpPost]
+        public async Task<IActionResult> RegistrarAsistencia(int id,Asistencia obj)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //obj.TrabajadoraId = id;
+                    obj.HoraSalida = null; // Inicialmente no hay hora de salida
+                    obj.HoraEntrada = DateTime.Now.TimeOfDay; // Hora de entrada es la hora actual
+                    obj.Fecha = DateTime.Now.Date; // Fecha es la fecha actual
+
+                     var asistencia= await _trabajadorService.RegisterAsistenciaAsync(obj);
+                    TempData["message"] = $"Asistencia registrada del empleado con codigo {asistencia.TrabajadoraId}";
+                    return RedirectToAction(nameof(AsistenciaTrabajador));
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.mensaje = "Hubo un error al registrar la asistencia: " + ex.Message;
+            }
+            return View(obj);
         }
 
         // GET: TrabajadorController/Details/5
@@ -46,7 +85,7 @@ namespace ProyClienteSpaHelena.Controllers
             }
             catch(Exception ex)
                 {
-                    ViewBag.error = "Hubo un error:"+ex;
+                    ViewBag.mensaje = ex.Message;
             }
             return View(obj);
         }

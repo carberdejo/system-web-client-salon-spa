@@ -4,90 +4,147 @@
     ViewData["Title"] = "CreateTrabajador";
 }
 
-<h1>CreateTrabajador</h1>
+<h1 class="mb-4 text-success">👩‍💼 Crear Nuevo Trabajador</h1>
 
-<h4>TrabajadorCreateDTO</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateTrabajador">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
-                <span asp-validation-for="Apellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dni" class="control-label"></label>
-                <input asp-for="Dni" class="form-control" />
-                <span asp-validation-for="Dni" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contrasena" class="control-label"></label>
-                <input asp-for="Contrasena" class="form-control" />
-                <span asp-validation-for="Contrasena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <input asp-for="IdRol" class="form-control" />
-                <span asp-validation-for="IdRol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaInicio" class="control-label"></label>
-                <input asp-for="FechaInicio" class="form-control" />
-                <span asp-validation-for="FechaInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiaSemana" class="control-label"></label>
-                <input asp-for="DiaSemana" class="form-control" />
-                <span asp-validation-for="DiaSemana" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraInicio" class="control-label"></label>
-                <input asp-for="HoraInicio" class="form-control" />
-                <span asp-validation-for="HoraInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraFin" class="control-label"></label>
-                <input asp-for="HoraFin" class="form-control" />
-                <span asp-validation-for="HoraFin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ValidoDesde" class="control-label"></label>
-                <input asp-for="ValidoDesde" class="form-control" />
-                <span asp-validation-for="ValidoDesde" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ValidoHasta" class="control-label"></label>
-                <input asp-for="ValidoHasta" class="form-control" />
-                <span asp-validation-for="ValidoHasta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<div class="card p-4 shadow-lg rounded-4">
+    <h4 class="mb-3">Datos del Trabajador</h4>
+    <hr />
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <form asp-action="CreateTrabajador">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Nombre" class="form-label fw-bold"></label>
+            <input asp-for="Nombre" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Apellido" class="form-label fw-bold"></label>
+            <input asp-for="Apellido" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Apellido" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Correo" class="form-label fw-bold"></label>
+            <input asp-for="Correo" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Correo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Telefono" class="form-label fw-bold"></label>
+            <input asp-for="Telefono" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Telefono" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Dni" class="form-label fw-bold"></label>
+            <input asp-for="Dni" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Dni" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Contrasena" class="form-label fw-bold"></label>
+            <input asp-for="Contrasena" type="password" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="Contrasena" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IdRol" class="form-label fw-bold"></label>
+            <input asp-for="IdRol" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="IdRol" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="FechaInicio" class="form-label fw-bold"></label>
+            <input asp-for="FechaInicio" type="date" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="FechaInicio" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="HoraInicio" class="form-label fw-bold"></label>
+            <input asp-for="HoraInicio" type="time" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="HoraInicio" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="HoraFin" class="form-label fw-bold"></label>
+            <input asp-for="HoraFin" type="time" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="HoraFin" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ValidoDesde" class="form-label fw-bold"></label>
+            <input asp-for="ValidoDesde" type="date" class="form-control rounded-3 shadow-sm" />
+            <span asp-validation-for="ValidoDesde" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="spa-btn spa-btn-green">
+                ✅ Crear Trabajador
+            </button>
+            <a asp-action="IndexTrabajador" class="spa-btn spa-btn-blue">
+                🔙 Volver a la lista
+            </a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
+<style>
+    .spa-btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        color: #fff !important;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .spa-btn-green {
+        background: linear-gradient(135deg, #34d399, #059669);
+    }
+
+        .spa-btn-green:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-blue {
+        background: linear-gradient(135deg, #60a5fa, #2563eb);
+    }
+
+        .spa-btn-blue:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-purple {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+
+        .spa-btn-purple:hover {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+    .spa-btn-yellow {
+        background: linear-gradient(135deg, #facc15, #eab308); /* amarillo dorado */
+    }
+
+        .spa-btn-yellow:hover {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            transform: scale(1.08);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+</style>

@@ -1,8 +1,150 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
-<div>@TempData["Mensaje"]</div>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container mt-5">
+
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success text-center">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    <div class="text-center mb-4">
+        <h1 class="display-4 spa-title">✨ Bienvenido a <span>Spa Helena</span> ✨</h1>
+        <p class="lead spa-subtitle">Gestiona tus clientes y citas fácilmente</p>
+    </div>
+
+
+    <div class="row justify-content-center g-4">
+        <div class="col-md-4">
+            <a asp-controller="Cliente" asp-action="CreateClientes" class="btn spa-btn spa-btn-blue w-100">
+                <i class="bi bi-person-plus me-2"></i> Agregar Cliente
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-controller="Reserva" asp-action="IndexReservaPendiente" class="btn spa-btn spa-btn-yellow w-100">
+                <i class="bi bi-calendar-event me-2"></i> Ver Citas Pendientes
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-controller="Reserva" asp-action="IndexReservaProgreso" class="btn spa-btn spa-btn-green w-100">
+                <i class="bi bi-calendar-event me-2"></i> Ver Citas En Progreso
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-controller="Reserva" asp-action="CreateReserva" class="btn spa-btn spa-btn-green w-100">
+                <i class="bi bi-plus-circle me-2"></i> Crear Cita
+            </a>
+        </div>
+    </div>
+
+
 </div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(".alert").delay(5000).slideUp(200, function(){});
+    </script>
+}
+
+<style>
+
+    /* Título principal */
+    .spa-title {
+        font-family: 'Segoe UI', 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 2.8rem;
+        color: #1e3a8a; /* azul elegante */
+        letter-spacing: 1px;
+        text-shadow: 0px 2px 6px rgba(0,0,0,0.08);
+    }
+
+        /* El span para resaltar "Spa Helena" */
+        .spa-title span {
+            color: #38bdf8; /* celestito suave */
+            font-style: italic;
+        }
+
+    /* Subtítulo */
+    .spa-subtitle {
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        font-size: 1.3rem;
+        color: #475569; /* gris-azulado */
+        font-weight: 400;
+        margin-top: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    /* Base para botones estilo spa */
+    /* Base estilo spa (misma que antes) */
+    .spa-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        text-transform: uppercase;
+        overflow: hidden; /* para contener el brillo */
+        z-index: 0;
+    }
+
+        /* Efecto brillo */
+        .spa-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -75%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient( 120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100% );
+            transform: skewX(-25deg);
+            opacity: 0;
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* Cuando pasas el mouse... brilla ✨ */
+        .spa-btn:hover::after {
+            left: 130%;
+            opacity: 1;
+        }
+
+        /* Hover general */
+        .spa-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            opacity: 0.97;
+        }
+
+    /* Azul */
+    .spa-btn-blue {
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        color: white;
+    }
+
+    /* Amarillo */
+    .spa-btn-yellow {
+        background: linear-gradient(135deg, #facc15, #f59e0b);
+        color: white;
+    }
+
+    /* Verde */
+    .spa-btn-green {
+        background: linear-gradient(135deg, #34d399, #10b981);
+        color: white;
+    }
+
+    /* Iconos */
+    .spa-btn i {
+        font-size: 1.4rem;
+    }
+
+</style>

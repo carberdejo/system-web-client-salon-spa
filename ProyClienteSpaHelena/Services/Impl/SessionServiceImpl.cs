@@ -32,6 +32,10 @@ namespace ProyClienteSpaHelena.Services.Impl
             httpContextAccessor.HttpContext!.Session.SetString("Usuario", usuario);
 
             return $"{userData!.Nombre} registrado correctamente";
-        }   
+        }
+        public void Logout()
+        {
+            httpContextAccessor.HttpContext!.Session.Remove("Usuario");
+        }
     }
 }

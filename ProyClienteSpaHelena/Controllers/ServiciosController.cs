@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProyClienteSpaHelena.Security;
 using ProyClienteSpaHelena.Services;
 using ProySpaHelena.Models;
 
 namespace ProyClienteSpaHelena.Controllers
 {
+    [AuthorizeSession]
     public class ServiciosController : Controller
     {
         private readonly ServiciosService _servicioService;

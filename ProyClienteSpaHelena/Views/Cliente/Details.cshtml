@@ -10,45 +10,102 @@
     <h4>Cliente</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Id)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NombreCompleto)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NombreCompleto)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Telefono)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Telefono)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Correo)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Correo)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Dni)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Dni)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreadoEn)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreadoEn)
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+<div class="d-flex gap-2">
+    <a asp-action="EditClientes" asp-route-id="@Model.Id" class="spa-btn spa-btn-green">
+        ✏️ Editar
+    </a>
+    <a asp-action="IndexClientes" class="spa-btn spa-btn-blue">
+        🔙 Volver a la lista
+    </a>
 </div>
+
+<style>
+    .spa-btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        color: #fff !important;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .spa-btn-green {
+        background: linear-gradient(135deg, #34d399, #059669);
+    }
+
+        .spa-btn-green:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-blue {
+        background: linear-gradient(135deg, #60a5fa, #2563eb);
+    }
+
+        .spa-btn-blue:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.08);
+        }
+
+    .spa-btn-purple {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+
+        .spa-btn-purple:hover {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+    .spa-btn-yellow {
+        background: linear-gradient(135deg, #facc15, #eab308); /* amarillo dorado */
+    }
+
+        .spa-btn-yellow:hover {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            transform: scale(1.08);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+</style>

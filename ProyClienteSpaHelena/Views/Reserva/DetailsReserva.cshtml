@@ -4,57 +4,82 @@
     ViewData["Title"] = "DetailsReserva";
 }
 
-<h1>DetailsReserva</h1>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header text-white bg-gradient"
+             style="background: linear-gradient(135deg, #d63384, #6f42c1);">
+            <h3 class="mb-0 text-center">✨ Detalles de la Reserva ✨</h3>
+        </div>
 
-<div>
-    <h4>ReservaResponseDTO</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCliente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreCliente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomRecepcionista)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomRecepcionista)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Notas)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Notas)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomTrabajadora)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomTrabajadora)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+        <div class="card-body p-4">
+            <h5 class="card-title text-muted text-center mb-4">Información de la Reserva</h5>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold text-secondary">
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-secondary">
+                    @Html.DisplayNameFor(model => model.NombreCliente)
+                </dt>
+                <dd class="col-sm-9">
+                    <span class="badge bg-light text-dark shadow-sm px-3 py-2">
+                        @Html.DisplayFor(model => model.NombreCliente)
+                    </span>
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-secondary">
+                    @Html.DisplayNameFor(model => model.NomRecepcionista)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.NomRecepcionista)
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-secondary">
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </dt>
+                <dd class="col-sm-9">
+                    <span class="text-primary fw-semibold">
+                        📅 @Html.DisplayFor(model => model.Fecha)
+                    </span>
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-secondary">
+                    @Html.DisplayNameFor(model => model.Estado)
+                </dt>
+                <dd class="col-sm-9">
+                    <span class="badge bg-success px-3 py-2 shadow-sm">
+                        @Html.DisplayFor(model => model.Estado)
+                    </span>
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-secondary">
+                    @Html.DisplayNameFor(model => model.Notas)
+                </dt>
+                <dd class="col-sm-9 fst-italic text-muted">
+                    @Html.DisplayFor(model => model.Notas)
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-secondary">
+                    @Html.DisplayNameFor(model => model.NomTrabajadora)
+                </dt>
+                <dd class="col-sm-9 text-pink fw-semibold">
+                    💇‍♀️ @Html.DisplayFor(model => model.NomTrabajadora)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="card-footer text-center bg-light">
+            @Html.ActionLink("✏️ Editar", "Edit", new { /* id = Model.PrimaryKey */ },
+                     new { @class = "btn btn-warning me-2 shadow-sm px-4" })
+
+            <a asp-action="Index" class="btn btn-outline-secondary shadow-sm px-4">
+                ⬅️ Volver a la Lista
+            </a>
+        </div>
+    </div>
 </div>

@@ -8,71 +8,65 @@
 
 <h4>Trabajadora</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditTrabajador">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
-                <span asp-validation-for="Apellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dni" class="control-label"></label>
-                <input asp-for="Dni" class="form-control" />
-                <span asp-validation-for="Dni" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contrasena" class="control-label"></label>
-                <input asp-for="Contrasena" class="form-control" />
-                <span asp-validation-for="Contrasena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <input asp-for="IdRol" class="form-control" />
-                <span asp-validation-for="IdRol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Activa" class="control-label"></label>
-                <input asp-for="Activa" class="form-control" />
-                <span asp-validation-for="Activa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaInicio" class="control-label"></label>
-                <input asp-for="FechaInicio" class="form-control" />
-                <span asp-validation-for="FechaInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="row justify-content-center">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditTrabajador">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="form-label fw-bold"></label>
+                    <input asp-for="Id" class="form-control" readonly />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nombre" class="form-label fw-bold"></label>
+                    <input asp-for="Nombre" class="form-control" placeholder="Nombre del trabajador" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apellido" class="form-label fw-bold"></label>
+                    <input asp-for="Apellido" class="form-control" placeholder="Apellido del trabajador" />
+                    <span asp-validation-for="Apellido" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Correo" class="form-label fw-bold"></label>
+                    <input asp-for="Correo" class="form-control" placeholder="Correo Electronico" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefono" class="form-label fw-bold"></label>
+                    <input asp-for="Telefono" class="form-control" placeholder="Numero de Telefono" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dni" class="form-label fw-bold"></label>
+                    <input asp-for="Dni" class="form-control" placeholder="Numero de DNI" />
+                    <span asp-validation-for="Dni" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Contrasena" class="form-label fw-bold"></label>
+                    <input asp-for="Contrasena" class="form-control" placeholder="Contraseña" />
+                    <span asp-validation-for="Contrasena" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdRol" class="form-label fw-bold"></label>
+                    <input asp-for="IdRol" class="form-control" />
+                    <span asp-validation-for="IdRol" class="text-danger"></span>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="spa-btn spa-btn-green">
+                        💾 Guardar
+                    </button>
+                    <a asp-action="IndexTrabajador" class="spa-btn spa-btn-blue">
+                        🔙 Volver a la lista
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -1,7 +1,18 @@
 ﻿@model ProyClienteSpaHelena.Models.ReservaRequestDto
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Newtonsoft.Json
+@using ProySpaHelena.Models;
 
 @{
     ViewData["Title"] = "CreateReserva";
+    var especialidades = ViewBag.especialidades as SelectList;
+    var especialidadesHtml = especialidades!.Select(x => $"<option value='{x.Value}'>{x.Text}</option>");
+    var opcionesEspecialidades = JsonConvert.SerializeObject(especialidadesHtml);
+	// if (Context.Session.GetString("Usuario") == null)
+	// {
+	// 	Response.Redirect("/Home/Index");
+	// }
+    var trabajador = JsonConvert.DeserializeObject <Trabajadora> (Context.Session.GetString("Usuario"));
 }
 
 <h2 class="text-center my-3">REGISTRO DE RESERVA</h2>
@@ -9,18 +20,37 @@
 <form asp-action="CreateReserva">
     <div class="border p-4 rounded bg-light">
         <div class="row mb-2">
-            <div class="form-group">
-                <label asp-for="ClienteId" class="form-label">ID Cliente</label>
-                @Html.DropDownListFor(model => model.ClienteId, (SelectList)ViewBag.cliente, "-- Seleccione --", new { @class = "form-control" })
+            <div class="col-md-4">
+                <label asp-for="ClienteId" class="form-label">Cliente</label>
+                @Html.DropDownListFor(model => model.ClienteId, (SelectList)ViewBag.cliente, "-- Seleccione Cliente --", new { @class = "form-control" })
+            </div>
+            
 
+            <div class="col-md-4">
+                <label class="form-label">Recepcionista</label>
+                <input type="hidden" asp-for="RecepcionistaId" value="@trabajador?.Id" />
+                <input type="text" class="form-control" value="@trabajador?.Nombre @trabajador?.Apellido" readonly />
             </div>
             <div class="col-md-4">
-                <label asp-for="RecepcionistaId" class="form-label">ID Recepcionista</label>
-                @Html.DropDownListFor(model => model.RecepcionistaId, (SelectList)ViewBag.trabajadores, "-- Seleccione --", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <label for="TrabajadoraId">Trabajadora</label>
-                @Html.DropDownListFor(model => model.TrabajadoraId, (SelectList)ViewBag.trabajadores, "-- Seleccione --", new { @class = "form-control" })
+                <label asp-for="TrabajadoraId" class="form-label">Trabajadora</label>
+
+                <!-- Combo para estado PENDIENTE -->
+                <select id="trabajadoraPendiente" name="TrabajadoraId" class="form-control" disabled>
+                    <option value="">-- Seleccione Trabajadora (Pendiente) --</option>
+                    @foreach (var item in ViewBag.trabajadoresDisponibles as SelectList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+
+                <!-- Combo para estado EN_SERVICIO -->
+                <select id="trabajadoraServicio" name="TrabajadoraId" class="form-control d-none" disabled>
+                    <option value="">-- Seleccione Trabajadora (Servicio) --</option>
+                    @foreach (var item in ViewBag.trabajadores as SelectList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
             </div>
         </div>
 
@@ -31,7 +61,11 @@
             </div>
             <div class="col-md-4">
                 <label asp-for="Estado" class="form-label">Estado</label>
-                <input asp-for="Estado" class="form-control" />
+                @Html.DropDownListFor(model => model.Estado, new SelectList(new[] {
+                new { Value = "PENDIENTE", Text = "PENDIENTE" },
+                new { Value = "EN_SERVICIO", Text = "EN SERVICIO" }
+                }, "Value", "Text"), "-- Seleccione Estado --", new { @class = "form-control" })
+                <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="col-md-4">
                 <label asp-for="Notas" class="form-label">Notas</label>
@@ -45,23 +79,13 @@
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>VarianteId</th>
+                    <th>Variante</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
                 </tr>
             </thead>
             <tbody id="detalles-table-body">
-                <tr>
-                    <td>
-                        @Html.DropDownList("Detalles[0].VarianteId", (SelectList)ViewBag.especialidades, "-- Seleccione Variante --", new { @class = "form-control" })
-                    </td>
-                    <td>
-                        <input type="number" name="Detalles[0].Cantidad" class="form-control" />
-                    </td>
-                    <td>
-                        <input type="number" name="Detalles[0].Precio" class="form-control" step="0.01" />
-                    </td>
-                </tr>
+                <!-- Las filas se generan dinámicamente -->
             </tbody>
         </table>
 
@@ -73,29 +97,74 @@
         </div>
     </div>
 </form>
-<div>@ViewBag.message</div>
+
+<div class="mt-2 text-danger">@ViewBag.message</div>
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
     <script>
         let detalleIndex = 0;
+        const opcionesEspecialidades = @Html.Raw(opcionesEspecialidades);
 
         function agregarDetalle() {
             const body = document.getElementById("detalles-table-body");
 
             const row = `
                 <tr>
-                    <td><input name="Detalles[${detalleIndex}].VarianteId" class="form-control" /></td>
-                    <td><input name="Detalles[${detalleIndex}].Cantidad" class="form-control" /></td>
-                    <td><input name="Detalles[${detalleIndex}].Precio" class="form-control" /></td>
+                    <td>
+                        <select name="Detalles[${detalleIndex}].VarianteId" class="form-control">
+                            <option value="">-- Seleccione Variante --</option>
+                            ${opcionesEspecialidades.join('')}
+                        </select>
+                    </td>
+                    <td><input name="Detalles[${detalleIndex}].Cantidad" type="number" class="form-control" /></td>
+                    <td><input name="Detalles[${detalleIndex}].Precio" type="number" class="form-control" step="0.01" /></td>
                 </tr>`;
 
             body.insertAdjacentHTML('beforeend', row);
             detalleIndex++;
         }
 
-        // Cargar una fila por defecto al abrir
-        window.onload = agregarDetalle;
+        window.onload = agregarDetalle; // agrega una fila al inicio
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const estadoSelect = document.querySelector("select[name='Estado']");
+            const comboPendiente = document.getElementById("trabajadoraPendiente");
+            const comboServicio = document.getElementById("trabajadoraServicio");
+
+                    function actualizarComboTrabajadora() {
+            const estado = estadoSelect.value;
+
+            if (estado === "PENDIENTE") {
+                comboPendiente.classList.remove("d-none");
+                comboPendiente.disabled = false;
+
+                comboServicio.classList.add("d-none");
+                comboServicio.disabled = true;
+
+            } else if (estado === "EN_SERVICIO") {
+                comboServicio.classList.remove("d-none");
+                comboServicio.disabled = false;
+
+                comboPendiente.classList.add("d-none");
+                comboPendiente.disabled = true;
+
+            } else {
+                comboServicio.classList.add("d-none");
+                comboServicio.disabled = true;
+
+                comboPendiente.classList.add("d-none");
+                comboPendiente.disabled = true;
+            }
+        }
+
+            estadoSelect.addEventListener("change", actualizarComboTrabajadora);
+            actualizarComboTrabajadora(); // Ejecuta al cargar
+        });
     </script>
 }
+
+<div>@ViewBag.message</div>

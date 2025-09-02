@@ -1,4 +1,5 @@
-﻿using ProyClienteSpaHelena.Models;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using ProyClienteSpaHelena.Models;
 using ProySpaHelena.Models;
 
 namespace ProyClienteSpaHelena.Services.Impl
@@ -45,6 +46,22 @@ namespace ProyClienteSpaHelena.Services.Impl
             return httpClient.GetFromJsonAsync<List<Trabajadora>>("api/Trabajadora")!;
         }
 
+        public async Task<Asistencia> RegisterAsistenciaAsync(Asistencia obj)
+        {
+            var crear = await httpClient.PostAsJsonAsync("api/Asistencia", obj);
+            
+            if (crear.IsSuccessStatusCode)
+            {
+                var asistencia = await crear.Content.ReadFromJsonAsync<Asistencia>();   
+                return asistencia!;
+            }
+            else
+            {
+                var Message = await crear.Content.ReadAsStringAsync();
+                throw new Exception( $"Error al registrar la asistencia: {Message}");
+            }
+        }
+
         public Task<Trabajadora> GetTrabajadorByIdAsync(int id)
         {
             return httpClient.GetFromJsonAsync<Trabajadora>($"api/Trabajadora/{id}")!;
@@ -62,6 +79,11 @@ namespace ProyClienteSpaHelena.Services.Impl
             {
                 return $"Error al actualizar el trabajador: {message}";
             }
+        }
+
+        public Task<List<Trabajadora>> GetAllTrabajadorWorkerAsync()
+        {
+            return httpClient.GetFromJsonAsync<List<Trabajadora>>("/worker")!;
         }
     }
 }

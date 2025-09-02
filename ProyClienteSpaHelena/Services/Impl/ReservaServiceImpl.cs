@@ -9,18 +9,19 @@ namespace ProyClienteSpaHelena.Services.Impl
         {
             _httpClient = httpClient;
         }
-        public async Task<ReservaResponseDTO> CreateReservaAsync(ReservaRequestDto reserva)
+        public async Task<string> CreateReservaAsync(ReservaRequestDto reserva)
         {
             var crear = await _httpClient.PostAsJsonAsync("api/Reserva", reserva);
+            
             if (crear.IsSuccessStatusCode)
             {
                 var reservaCreada = await crear.Content.ReadFromJsonAsync<ReservaResponseDTO>();
-                return reservaCreada!;
+                return $"La reserva n° {reservaCreada!.Id} ha sido creada";
             }
             else
             {
                 var errorMessage = crear.Content.ReadAsStringAsync().Result;
-                throw new Exception($"Error al crear la reserva: {errorMessage}");
+                return $"Error al crear la reserva: {errorMessage}";
             }
         }
 
@@ -32,6 +33,30 @@ namespace ProyClienteSpaHelena.Services.Impl
         public Task<IEnumerable<ReservaResponseDTO>> GetReservasAsync()
         {
             return _httpClient.GetFromJsonAsync<IEnumerable<ReservaResponseDTO>>("api/Reserva")!;
+        }
+        public async Task<ReservaResponseDTO> EstadoReservaAsync(int id, string estado)
+        {
+            var update = await _httpClient.PutAsJsonAsync($"api/Reserva/{id}/Estado", estado);
+            if (update.IsSuccessStatusCode)
+            {
+                var mensagge = await update.Content.ReadFromJsonAsync<ReservaResponseDTO>();
+                return mensagge!;
+            }
+            else
+            {
+                var errorMessage = await update.Content.ReadAsStringAsync();
+                throw new Exception($"Error al crear el cliente: {errorMessage}");
+            }
+        }
+
+        public Task<IEnumerable<ReservaResponseDTO>> GetReservasPendienteAsync()
+        {
+            return _httpClient.GetFromJsonAsync<IEnumerable<ReservaResponseDTO>>("api/Reserva/Pendiente")!;
+        }
+
+        public Task<IEnumerable<ReservaResponseDTO>> GetReservasProgresoAsync()
+        {
+            return _httpClient.GetFromJsonAsync<IEnumerable<ReservaResponseDTO>>("api/Reserva/Progreso")!;
         }
     }
 }

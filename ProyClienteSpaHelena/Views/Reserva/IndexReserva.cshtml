@@ -4,67 +4,123 @@
     ViewData["Title"] = "IndexReserva";
 }
 
-<h1>IndexReserva</h1>
+<h1 class="titulo">IndexReserva</h1>
 
 <p>
-    <a asp-action="CreateReserva">Crear</a>
+    <a asp-action="CreateReserva" class="btn-crear">➕ Crear Reserva</a>
 </p>
-<table class="table">
+
+<table class="tabla-reservas">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreCliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomRecepcionista)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomTrabajadora)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.NombreCliente)</th>
+            <th>@Html.DisplayNameFor(model => model.NomRecepcionista)</th>
+            <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>@Html.DisplayNameFor(model => model.Notas)</th>
+            <th>@Html.DisplayNameFor(model => model.NomTrabajadora)</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomRecepcionista)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomTrabajadora)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Ver", "DetailsReserva", new {  id=item.Id }) |
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.NombreCliente)</td>
+                <td>@Html.DisplayFor(modelItem => item.NomRecepcionista)</td>
+                <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                <td>@Html.DisplayFor(modelItem => item.Notas)</td>
+                <td>@Html.DisplayFor(modelItem => item.NomTrabajadora)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-accion btn-editar">✏️ Editar</a> |
+                    <a asp-action="DetailsReserva" asp-route-id="@item.Id" class="btn-accion btn-ver">👁 Ver</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f5f7fa;
+    }
+
+    .titulo {
+        color: #2a9d8f;
+        margin-bottom: 20px;
+    }
+
+    .btn-crear {
+        display: inline-block;
+        background: #2a9d8f;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+        .btn-crear:hover {
+            background: #21867a;
+        }
+
+    .tabla-reservas {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 8px;
+    }
+
+        .tabla-reservas th {
+            background: #264653;
+            color: white;
+            text-align: left;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .tabla-reservas td {
+            background: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .tabla-reservas tr {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .tabla-reservas tr:hover {
+                transform: scale(1.01);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+
+    .btn-accion {
+        padding: 5px 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 0 3px;
+    }
+
+    .btn-editar {
+        background: #e9c46a;
+        color: #000;
+    }
+
+        .btn-editar:hover {
+            background: #d4a017;
+        }
+
+    .btn-ver {
+        background: #457b9d;
+        color: #fff;
+    }
+
+        .btn-ver:hover {
+            background: #1d3557;
+        }
+</style>

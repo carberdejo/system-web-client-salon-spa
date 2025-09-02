@@ -1,0 +1,149 @@
+﻿@model IEnumerable<ProyClienteSpaHelena.Models.ReservaResponseDTO>
+
+@{
+    ViewData["Title"] = "Reservas Pendientes";
+}
+
+<h1 class="mb-4">Reservas Pendientes</h1>
+
+<a asp-action="Create" class="spa-btn spa-btn-green mb-4">
+    <i class="fas fa-plus-circle me-2"></i> Crear Nueva Reserva
+</a>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card spa-card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"> Reserva #@item.Id</h5>
+
+                    <p><strong>Cliente:</strong> @item.NombreCliente</p>
+                    <p><strong>Recepcionista:</strong> @item.NomRecepcionista</p>
+                    <p><strong>Fecha:</strong> @item.Fecha.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Estado:</strong> <span class="badge bg-info">@item.Estado</span></p>
+                    <p><strong>Notas:</strong> @item.Notas</p>
+                    <p><strong>Trabajadora:</strong> @item.NomTrabajadora</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a asp-action="CambiarEstadoReserva" asp-route-id="@item.Id" class="spa-btn spa-btn-blue">
+                        Cambiar Estado
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<style>
+    /* Botón base */
+    .spa-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 26px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        overflow: hidden;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease-in-out;
+        text-decoration: none; /* quita subrayado */
+    }
+
+    /* Verde spa */
+    .spa-btn-green {
+        background: linear-gradient(135deg, #34d399, #10b981);
+        color: #fff !important;
+    }
+
+    /* Brillito ✨ */
+    .spa-btn::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -75%;
+        width: 50%;
+        height: 200%;
+        background: linear-gradient( 120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100% );
+        transform: skewX(-25deg);
+        opacity: 0;
+        transition: all 0.6s ease-in-out;
+    }
+
+    /* Hover */
+    .spa-btn:hover {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+    }
+
+        .spa-btn:hover::after {
+            left: 130%;
+            opacity: 1;
+        }
+
+    /* Iconito */
+    .spa-btn i {
+        font-size: 1.3rem;
+    }
+    /* Tarjetas spa */
+    .spa-card {
+        border: none;
+        border-radius: 20px;
+        background: linear-gradient(145deg, #ffffff, #f9fafb);
+        transition: all 0.3s ease-in-out;
+    }
+
+        .spa-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Título */
+        .spa-card .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 15px;
+        }
+
+        /* Textos */
+        .spa-card p {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .spa-card .card-footer {
+            background: transparent;
+            border-top: none;
+        }
+
+    /* Botón azul spa */
+    .spa-btn {
+        padding: 10px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .spa-btn-blue {
+        background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        color: #fff;
+        border: none;
+    }
+
+        .spa-btn-blue:hover {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+</style>

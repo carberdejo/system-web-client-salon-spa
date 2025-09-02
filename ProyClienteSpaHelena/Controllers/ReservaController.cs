@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using ProyClienteSpaHelena.Services;
 using ProyClienteSpaHelena.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ProyClienteSpaHelena.Security;
 
 namespace ProyClienteSpaHelena.Controllers
 {
+    [AuthorizeSession]
     public class ReservaController : Controller
     {
         private readonly ReservaService reservaService;
@@ -26,6 +28,18 @@ namespace ProyClienteSpaHelena.Controllers
             return View(await reservaService.GetReservasAsync());
         }
 
+        // GET: ReservaPendientController
+        public async Task<IActionResult> IndexReservaPendiente()
+        {
+            return View(await reservaService.GetReservasPendienteAsync());
+
+        }
+        // GET: ReservaPendientController
+        public async Task<IActionResult> IndexReservaProgreso()
+        {
+            return View(await reservaService.GetReservasProgresoAsync());
+        }
+
         // GET: ReservaController/Details/5
         public async Task<IActionResult> DetailsReserva(int id)
         {
@@ -35,7 +49,8 @@ namespace ProyClienteSpaHelena.Controllers
         // GET: ReservaController/Create
         public async Task<IActionResult> CreateReserva()
         {
-            ViewBag.trabajadores= new SelectList(await trabajadorService.GetAllTrabajadorAsync(), "Id", "Apellido");
+            ViewBag.trabajadores = new SelectList(await trabajadorService.GetAllTrabajadorWorkerAsync(), "Id", "Nombre");
+            ViewBag.trabajadoresDisponibles= new SelectList(await trabajadorService.GetAllTrabajadorAsync(), "Id", "Nombre");
             ViewBag.especialidades = new SelectList(await especialidadService.GetAllEspecialidadesAsync(), "Id", "Nombre");
             ViewBag.cliente = new SelectList(await clienteService.GetAllClientesAsync(), "Id", "NombreCompleto");
 
@@ -51,29 +66,60 @@ namespace ProyClienteSpaHelena.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (obj.Detalles == null)
+                        throw new Exception("Detalles es null");
+
+                    if (obj.Detalles.Count == 0)
+                        throw new Exception("No hay detalles enviados");
+                    Console.WriteLine("RESERVA enviados: " + obj.ClienteId,
+                        obj.RecepcionistaId,obj.TrabajadoraId,obj.Fecha,obj.Notas);
+                    Console.WriteLine("detalle enviados: " + obj.Detalles.Count);
 
                     var response = await reservaService.CreateReservaAsync(obj);
-                    if (response != null)
-                    {
-                        TempData["Mensaje"] = "Reserva creada exitosamente.";
-                    }
-                    else
-                    {
-                        TempData["Mensaje"] = "Error al crear la reserva.";
-                    }
-                    
-                    return RedirectToAction(nameof(Index));
+
+                    TempData["Mensaje"] = response;
+                    return RedirectToAction("Index","Home");
                 }
             }
             catch (Exception ex)
             {
-                ViewBag.message = "Error al crear la reserva: " + ex.Message;
+                ViewBag.message = ex.Message;
             }
-            ViewBag.trabajadores = new SelectList(await trabajadorService.GetAllTrabajadorAsync(), "Id", "Apellido");
+            ViewBag.trabajadores = new SelectList(await trabajadorService.GetAllTrabajadorWorkerAsync(), "Id", "Nombre");
+            ViewBag.trabajadoresDisponibles = new SelectList(await trabajadorService.GetAllTrabajadorAsync(), "Id", "Nombre");
             ViewBag.especialidades = new SelectList(await especialidadService.GetAllEspecialidadesAsync(), "Id", "Nombre");
             ViewBag.cliente = new SelectList(await clienteService.GetAllClientesAsync(), "Id", "NombreCompleto");
             return View(obj);
         }
+
+        // GET: ReservaController/CambiarEstadoReserva
+        public async Task<IActionResult> CambiarEstadoReserva(int id)
+        {
+            return View(await reservaService.GetReservaByIdAsync(id));
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> CambiarEstadoReserva(int id, string estado)
+        {
+            try
+            {
+                
+                var update = await reservaService.EstadoReservaAsync(id, estado);
+                TempData["mensaje"] = $"La reserva {update.Id} ha sido cambiada a {update.Estado}";
+                if (estado.ToLower() == "completada")
+                {
+                    return RedirectToAction(nameof(DetailsReserva),new {id=update.Id});
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.message = "Error:" + ex.Message;
+            }
+
+            return View(await reservaService.GetReservaByIdAsync(id));
+        }
+
 
         // GET: ReservaController/Edit/5
         public async Task<IActionResult> EditReserva(int id)

@@ -29,6 +29,14 @@ builder.Services.AddHttpClient<ReservaService, ReservaServiceImpl>(s => {
     s.BaseAddress = new Uri("http://localhost:5269/");
     s.Timeout = TimeSpan.FromSeconds(15);
 });
+builder.Services.AddHttpClient<HorarioService, HorarioServiceImpl>(s => {
+    s.BaseAddress = new Uri("http://localhost:5269/");
+    s.Timeout = TimeSpan.FromSeconds(15);
+});
+builder.Services.AddHttpClient<Reportes_Service, Reportes_Service_Impl>(s => {
+    s.BaseAddress = new Uri("http://localhost:5269/");
+    s.Timeout = TimeSpan.FromSeconds(15);
+});
 
 builder.Services.AddControllersWithViews();
 

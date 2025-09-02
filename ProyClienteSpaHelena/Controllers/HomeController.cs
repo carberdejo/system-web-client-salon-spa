@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyClienteSpaHelena.Models;
+using ProyClienteSpaHelena.Security;
 using System.Diagnostics;
 
 namespace ProyClienteSpaHelena.Controllers
 {
+    [AuthorizeSession]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

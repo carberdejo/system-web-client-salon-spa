@@ -6,5 +6,6 @@ namespace ProyClienteSpaHelena.Services
     public interface SessionService
     {
         Task<string> Login(LoginDTO loginDTO);
+        void Logout();
     }
 }

@@ -36,7 +36,7 @@ namespace ProyClienteSpaHelena.Controllers
                         return View(obj);
                     }
                     TempData["Mensaje"] = mensaje;
-                    return RedirectToAction("IndexClientes", "Cliente");
+                    return RedirectToAction("Index", "Home");
                 }               
             }
             catch(Exception ex)
@@ -46,9 +46,14 @@ namespace ProyClienteSpaHelena.Controllers
             return View(obj);
         }
 
+        [HttpPost]
+        public IActionResult Logout(LoginDTO obj)
+        {
+            _sessionService.Logout();
+            return RedirectToAction(nameof(Login));
+        }
 
 
-        
-        
+
     }
 }
